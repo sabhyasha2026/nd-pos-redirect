@@ -1,0 +1,32 @@
+<script>
+  (function () {
+    var userAgent = navigator.userAgent || navigator.vendor || window.opera;
+
+    var playStoreUrl = "https://play.google.com/store/apps/details?id=com.neardelight.pos&hl=en_IN";
+
+    // Add App Store link later (after verification)
+    var appStoreUrl = "";
+
+    var websiteUrl = "http://pos.neardelight.com/";
+
+    // Android → Play Store
+    if (/android/i.test(userAgent)) {
+      window.location.replace(playStoreUrl);
+      return;
+    }
+
+    // iOS → App Store OR fallback to website
+    if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
+      if (appStoreUrl && appStoreUrl.trim() !== "") {
+        window.location.replace(appStoreUrl);
+      } else {
+        // fallback if app store not available
+        window.location.replace(websiteUrl);
+      }
+      return;
+    }
+
+    // Default → Website
+    window.location.replace(websiteUrl);
+  })();
+</script>
